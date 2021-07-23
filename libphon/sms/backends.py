@@ -97,7 +97,7 @@ class Digitaleo(Backend):
         if self.send_date:
             querydict['date'] = self.send_date.isoformat()
         url = '{}?{}'.format(self.send_url, querydict.urlencode())
-        response = requests.get(url)
+        response = requests.get(url, verify=False)
         if response.status_code >= 500:
             raise ServiceUnavailable(response.text)
         self.parse_response(response)
